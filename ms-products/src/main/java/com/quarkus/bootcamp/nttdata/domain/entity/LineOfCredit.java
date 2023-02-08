@@ -21,7 +21,7 @@ public class LineOfCredit extends Product {
    */
   protected Double costs;
   /**
-   * Fecha de cierre para el calculo del pago (dd-mm)
+   * Fecha de cierre para el calculo del pago (dd)
    */
   protected String closingDate;
   /**

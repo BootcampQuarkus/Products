@@ -52,7 +52,7 @@ public class CreditRepository implements IRepository<CreditD> {
   public CreditD save(CreditD creditD) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu.MM.dd.HH:mm:ss");
     String date = ZonedDateTime.now(ZoneId.systemDefault()).format(formatter);
-    if (creditD.getCreatedAt().isEmpty()) {
+    if (creditD.getCreatedAt() == null) {
       creditD.setCreatedAt(date);
     } else {
       creditD.setUpdatedAt(date);

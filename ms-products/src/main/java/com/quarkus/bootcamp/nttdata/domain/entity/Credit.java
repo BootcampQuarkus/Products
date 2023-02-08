@@ -20,7 +20,7 @@ public class Credit extends Product {
    */
   protected Integer dues;
   /**
-   * Fecha de pago de las cuotas (dd-mm).
+   * Fecha de pago de las cuotas (dd).
    */
   protected String paymentDueDate;
 
