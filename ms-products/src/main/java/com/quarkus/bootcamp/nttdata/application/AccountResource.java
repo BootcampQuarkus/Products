@@ -3,6 +3,7 @@ package com.quarkus.bootcamp.nttdata.application;
 import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.services.AccountService;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -26,18 +27,21 @@ public class AccountResource {
   }
 
   @POST
+  @Transactional
   public Response create(Account account) {
     return Response.ok(service.create(account)).build();
   }
 
   @PUT
   @Path("{id}")
+  @Transactional
   public Response update(@PathParam("id") Long id, Account account) {
     return Response.ok(service.update(id, account)).build();
   }
 
   @DELETE
   @Path("{id}")
+  @Transactional
   public Response delete(@PathParam("id") Long id) {
     return Response.ok(service.delete(id)).build();
   }

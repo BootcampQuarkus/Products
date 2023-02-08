@@ -52,7 +52,7 @@ public class AccountRepository implements IRepository<AccountD> {
   public AccountD save(AccountD account) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu.MM.dd.HH:mm:ss");
     String date = ZonedDateTime.now(ZoneId.systemDefault()).format(formatter);
-    if (account.getCreatedAt().isEmpty()) {
+    if (account.getCreatedAt() == null) {
       account.setCreatedAt(date);
     } else {
       account.setUpdatedAt(date);
