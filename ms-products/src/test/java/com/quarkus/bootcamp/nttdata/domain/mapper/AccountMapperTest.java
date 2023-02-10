@@ -12,18 +12,27 @@ class AccountMapperTest {
   @Inject
   AccountMapper mapper;
 
+  /**
+   * Cuando se envia un elemento null al metodo toDto debe retornar un NullPointerException.
+   */
   @Test
   public void toDtoNull() {
     Account account = null;
     Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(account));
   }
 
+  /**
+   * Cuando se envia un elemento null al metodo toEntity debe retornar un NullPointerException.
+   */
   @Test
   public void toEntityNull() {
     AccountD accountD = null;
     Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(accountD));
   }
 
+  /**
+   * El metodo toDto debe retornar un Dto.
+   */
   @Test
   public void toDtoReturnDto() {
     Account account = new Account();
@@ -31,6 +40,9 @@ class AccountMapperTest {
     Assertions.assertInstanceOf(AccountD.class, actual);
   }
 
+  /**
+   * El metodo toDto debe retornar un Entity.
+   */
   @Test
   public void toEntityReturnEntity() {
     AccountD accountD = new AccountD();
@@ -38,6 +50,9 @@ class AccountMapperTest {
     Assertions.assertInstanceOf(Account.class, actual);
   }
 
+  /**
+   * Cuando se envia un elemento vacio al metodo toDto debe retornar un Dto vacio.
+   */
   @Test
   public void toDtoVoid() {
     Account account = new Account();
@@ -46,6 +61,9 @@ class AccountMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento vacio al metodo toEntity debe retornar un Entity vacio.
+   */
   @Test
   public void toEntityVoid() {
     AccountD accountD = new AccountD();
@@ -54,6 +72,10 @@ class AccountMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento valido al metodo toDto debe retornar un Dto con los mismos datos en los campos
+   * amount, customerId y cardId.
+   */
   @Test
   public void toDtoValid() {
     // Variables
@@ -79,6 +101,10 @@ class AccountMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
+   * amount, customerId y cardId.
+   */
   @Test
   public void toEntityValid() {
     // Variables
@@ -103,5 +129,4 @@ class AccountMapperTest {
 
     Assertions.assertEquals(expected, actual);
   }
-
 }

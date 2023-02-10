@@ -28,12 +28,4 @@ public class LineOfCredit extends Product {
    * Fecha de pago de la cuota (dd).
    */
   protected String paymentDueDate;
-
-  public LineOfCredit(Double amount, Long cutomerId, Double available, Double costs, String closingDate, String paymentDueDate) {
-    super(amount, cutomerId);
-    this.available = available;
-    this.costs = costs;
-    this.closingDate = closingDate;
-    this.paymentDueDate = paymentDueDate;
-  }
 }

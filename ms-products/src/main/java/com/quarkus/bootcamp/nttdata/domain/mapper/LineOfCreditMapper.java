@@ -1,14 +1,21 @@
 package com.quarkus.bootcamp.nttdata.domain.mapper;
 
 import com.quarkus.bootcamp.nttdata.domain.entity.LineOfCredit;
-import com.quarkus.bootcamp.nttdata.domain.interfaces.mappers.ILineOfCreditMapper;
+import com.quarkus.bootcamp.nttdata.domain.interfaces.IMapper;
 import com.quarkus.bootcamp.nttdata.infraestructure.entity.LineOfCreditD;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class LineOfCreditMapper implements ILineOfCreditMapper {
+public class LineOfCreditMapper implements IMapper<LineOfCredit, LineOfCreditD> {
+  /**
+   * Transforma el objeto de LineOfCredit a LineOfCreditD.
+   *
+   * @param lineOfCredit Objeto de la clase LineOfCredit que se desea transformar.
+   * @return Objeto de la clase LineOfCreditD.
+   * @throws NullPointerException
+   */
   @Override
-  public LineOfCreditD toDto(LineOfCredit lineOfCredit) {
+  public LineOfCreditD toDto(LineOfCredit lineOfCredit) throws NullPointerException {
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(lineOfCredit.getAmount());
     lineOfCreditD.setAvailable(lineOfCredit.getAvailable());
@@ -19,9 +26,17 @@ public class LineOfCreditMapper implements ILineOfCreditMapper {
     return lineOfCreditD;
   }
 
+  /**
+   * Transforma el objeto de LineOfCreditD a LineOfCredit.
+   *
+   * @param lineOfCreditD Objeto de la clase LineOfCreditD que se desea transformar.
+   * @return Objeto de la clase LineOfCredit.
+   * @throws NullPointerException
+   */
   @Override
-  public LineOfCredit toEntity(LineOfCreditD lineOfCreditD) {
+  public LineOfCredit toEntity(LineOfCreditD lineOfCreditD) throws NullPointerException {
     LineOfCredit lineOfCredit = new LineOfCredit();
+    lineOfCredit.setId(lineOfCreditD.id);
     lineOfCredit.setAmount(lineOfCreditD.getAmount());
     lineOfCredit.setAvailable(lineOfCreditD.getAvailable());
     lineOfCredit.setClosingDate(lineOfCreditD.getClosingDate());

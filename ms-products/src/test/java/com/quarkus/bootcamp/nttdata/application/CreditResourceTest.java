@@ -1,8 +1,6 @@
 package com.quarkus.bootcamp.nttdata.application;
 
-import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
-import com.quarkus.bootcamp.nttdata.domain.services.AccountService;
 import com.quarkus.bootcamp.nttdata.domain.services.CreditService;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
@@ -15,7 +13,6 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 
 @QuarkusTest
 class CreditResourceTest {

@@ -12,18 +12,27 @@ class LineOfCreditMapperTest {
   @Inject
   LineOfCreditMapper mapper;
 
+  /**
+   * Cuando se envia un elemento null al metodo toDto debe retornar un NullPointerException.
+   */
   @Test
   public void toDtoNull() {
     LineOfCredit lineOfCredit = null;
     Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(lineOfCredit));
   }
 
+  /**
+   * Cuando se envia un elemento null al metodo toEntity debe retornar un NullPointerException.
+   */
   @Test
   public void toEntityNull() {
     LineOfCreditD lineOfCreditD = null;
     Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(lineOfCreditD));
   }
 
+  /**
+   * El metodo toDto debe retornar un Dto.
+   */
   @Test
   public void toDtoReturnDto() {
     LineOfCredit lineOfCredit = new LineOfCredit();
@@ -31,6 +40,9 @@ class LineOfCreditMapperTest {
     Assertions.assertInstanceOf(LineOfCreditD.class, actual);
   }
 
+  /**
+   * El metodo toDto debe retornar un Entity.
+   */
   @Test
   public void toEntityReturnEntity() {
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
@@ -38,6 +50,9 @@ class LineOfCreditMapperTest {
     Assertions.assertInstanceOf(LineOfCredit.class, actual);
   }
 
+  /**
+   * Cuando se envia un elemento vacio al metodo toDto debe retornar un Dto vacio.
+   */
   @Test
   public void toDtoVoid() {
     LineOfCredit lineOfCredit = new LineOfCredit();
@@ -46,6 +61,9 @@ class LineOfCreditMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento vacio al metodo toEntity debe retornar un Entity vacio.
+   */
   @Test
   public void toEntityVoid() {
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
@@ -54,6 +72,10 @@ class LineOfCreditMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento valido al metodo toDto debe retornar un Dto con los mismos datos en los campos
+   * amount, customerId, available, cost, closingDate y paymentDueDate.
+   */
   @Test
   public void toDtoValid() {
     // Variables
@@ -88,6 +110,10 @@ class LineOfCreditMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
+   * amount, customerId, available, cost, closingDate y paymentDueDate.
+   */
   @Test
   public void toEntityValid() {
     // Variables
@@ -121,5 +147,4 @@ class LineOfCreditMapperTest {
 
     Assertions.assertEquals(expected, actual);
   }
-
 }

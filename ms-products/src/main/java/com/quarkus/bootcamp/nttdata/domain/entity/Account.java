@@ -15,9 +15,4 @@ public class Account extends Product {
    * Id de la tarjeta vinculada a dicha cuenta
    */
   protected Long cardId;
-
-  public Account(Double amount, Long cutomerId, Long cardId) {
-    super(amount, cutomerId);
-    this.cardId = cardId;
-  }
 }
