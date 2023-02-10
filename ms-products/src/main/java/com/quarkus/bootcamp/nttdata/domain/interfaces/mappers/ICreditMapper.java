@@ -4,7 +4,8 @@ import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
 import com.quarkus.bootcamp.nttdata.infraestructure.entity.CreditD;
 
 public interface ICreditMapper {
-  Credit toDto(CreditD creditD);
+  CreditD toDto(Credit credit);
 
-  CreditD toEntity(Credit credit);
+  Credit toEntity(CreditD creditD);
+
 }

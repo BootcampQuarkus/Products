@@ -7,6 +7,7 @@ import com.quarkus.bootcamp.nttdata.infraestructure.entity.LineOfCreditD;
 import com.quarkus.bootcamp.nttdata.infraestructure.repository.LineOfCreditRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -23,34 +24,42 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
     return repository.getAll()
           .stream()
           .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toDto(p))
+          .map(p -> mapper.toEntity(p))
           .toList();
   }
 
   @Override
   public LineOfCredit getById(Long id) {
-    return mapper.toDto(repository.getById(id));
+    return repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .map(p -> mapper.toEntity(p))
+          .orElseThrow(() -> new NotFoundException());
   }
 
   @Override
   public LineOfCredit create(LineOfCredit lineOfCredit) {
-    return mapper.toDto(repository.save(mapper.toEntity(lineOfCredit)));
+    return mapper.toEntity(repository.save(mapper.toDto(lineOfCredit)));
   }
 
   @Override
   public LineOfCredit update(Long id, LineOfCredit lineOfCredit) {
-    LineOfCreditD lineOfCreditD = repository.getById(id);
+    LineOfCreditD lineOfCreditD = repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .orElseThrow(() -> new NotFoundException());
     lineOfCreditD.setAvailable(lineOfCredit.getAvailable());
     lineOfCreditD.setCosts(lineOfCredit.getCosts());
     lineOfCreditD.setAmount(lineOfCredit.getAmount());
     lineOfCreditD.setClosingDate(lineOfCredit.getClosingDate());
     lineOfCreditD.setPaymentDueDate(lineOfCredit.getPaymentDueDate());
     lineOfCreditD.setCutomerId(lineOfCredit.getCutomerId());
-    return mapper.toDto(repository.save(lineOfCreditD));
+    return mapper.toEntity(repository.save(lineOfCreditD));
   }
 
   @Override
   public LineOfCredit delete(Long id) {
-    return mapper.toDto(repository.softDelete(repository.getById(id)));
+    LineOfCreditD lineOfCreditD = repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .orElseThrow(() -> new NotFoundException());
+    return mapper.toEntity(repository.softDelete(lineOfCreditD));
   }
 }

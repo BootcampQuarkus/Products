@@ -7,6 +7,7 @@ import com.quarkus.bootcamp.nttdata.infraestructure.entity.AccountD;
 import com.quarkus.bootcamp.nttdata.infraestructure.repository.AccountRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -24,31 +25,39 @@ public class AccountService implements IService<Account, Account> {
     return repository.getAll()
           .stream()
           .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toDto(p))
+          .map(p -> mapper.toEntity(p))
           .toList();
   }
 
   @Override
   public Account getById(Long id) {
-    return mapper.toDto(repository.getById(id));
+    return repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .map(p -> mapper.toEntity(p))
+          .orElseThrow(() -> new NotFoundException());
   }
 
   @Override
   public Account create(Account account) {
-    return mapper.toDto(repository.save(mapper.toEntity(account)));
+    return mapper.toEntity(repository.save(mapper.toDto(account)));
   }
 
   @Override
   public Account update(Long id, Account account) {
-    AccountD accountD = repository.getById(id);
+    AccountD accountD = repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .orElseThrow(() -> new NotFoundException());
     accountD.setCardId(account.getCardId());
     accountD.setAmount(account.getAmount());
     accountD.setCutomerId(account.getCutomerId());
-    return mapper.toDto(repository.save(accountD));
+    return mapper.toEntity(repository.save(accountD));
   }
 
   @Override
   public Account delete(Long id) {
-    return mapper.toDto(repository.softDelete(repository.getById(id)));
+    AccountD accountD = repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .orElseThrow(() -> new NotFoundException());
+    return mapper.toEntity(repository.softDelete(accountD));
   }
 }

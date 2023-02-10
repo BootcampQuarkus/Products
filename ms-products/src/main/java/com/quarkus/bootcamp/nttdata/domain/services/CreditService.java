@@ -7,6 +7,7 @@ import com.quarkus.bootcamp.nttdata.infraestructure.entity.CreditD;
 import com.quarkus.bootcamp.nttdata.infraestructure.repository.CreditRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -23,33 +24,41 @@ public class CreditService implements IService<Credit, Credit> {
     return repository.getAll()
           .stream()
           .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toDto(p))
+          .map(p -> mapper.toEntity(p))
           .toList();
   }
 
   @Override
   public Credit getById(Long id) {
-    return mapper.toDto(repository.getById(id));
+    return repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .map(p -> mapper.toEntity(p))
+          .orElseThrow(() -> new NotFoundException());
   }
 
   @Override
   public Credit create(Credit credit) {
-    return mapper.toDto(repository.save(mapper.toEntity(credit)));
+    return mapper.toEntity(repository.save(mapper.toDto(credit)));
   }
 
   @Override
   public Credit update(Long id, Credit credit) {
-    CreditD creditD = repository.getById(id);
+    CreditD creditD = repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .orElseThrow(() -> new NotFoundException());
     creditD.setAmount(credit.getAmount());
     creditD.setCutomerId(credit.getCutomerId());
     creditD.setBalance(credit.getBalance());
     creditD.setDues(credit.getDues());
     creditD.setPaymentDueDate(credit.getPaymentDueDate());
-    return mapper.toDto(repository.save(creditD));
+    return mapper.toEntity(repository.save(creditD));
   }
 
   @Override
   public Credit delete(Long id) {
-    return mapper.toDto(repository.softDelete(repository.getById(id)));
+    CreditD creditD = repository.findByIdOptional(id)
+          .filter(p -> (p.getDeletedAt() == null))
+          .orElseThrow(() -> new NotFoundException());
+    return mapper.toEntity(repository.softDelete(creditD));
   }
 }

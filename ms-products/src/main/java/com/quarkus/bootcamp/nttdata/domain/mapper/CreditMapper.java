@@ -8,7 +8,18 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class CreditMapper implements ICreditMapper {
   @Override
-  public Credit toDto(CreditD creditD) {
+  public CreditD toDto(Credit credit) {
+    CreditD creditD = new CreditD();
+    creditD.setAmount(credit.getAmount());
+    creditD.setCutomerId(credit.getCutomerId());
+    creditD.setBalance(credit.getBalance());
+    creditD.setDues(credit.getDues());
+    creditD.setPaymentDueDate(credit.getPaymentDueDate());
+    return creditD;
+  }
+
+  @Override
+  public Credit toEntity(CreditD creditD) {
     Credit credit = new Credit();
     credit.setAmount(creditD.getAmount());
     credit.setCutomerId(creditD.getCutomerId());
@@ -18,14 +29,4 @@ public class CreditMapper implements ICreditMapper {
     return credit;
   }
 
-  @Override
-  public CreditD toEntity(Credit credit) {
-    CreditD creditD = new CreditD();
-    creditD.setAmount(credit.getAmount());
-    creditD.setCutomerId(credit.getCutomerId());
-    creditD.setBalance(credit.getBalance());
-    creditD.setDues(credit.getDues());
-    creditD.setPaymentDueDate(credit.getPaymentDueDate());
-    return creditD;
-  }
 }

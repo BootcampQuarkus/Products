@@ -4,7 +4,7 @@ import com.quarkus.bootcamp.nttdata.domain.entity.LineOfCredit;
 import com.quarkus.bootcamp.nttdata.infraestructure.entity.LineOfCreditD;
 
 public interface ILineOfCreditMapper {
-  LineOfCredit toDto(LineOfCreditD lineOfCreditD);
+  LineOfCreditD toDto(LineOfCredit lineOfCredit);
 
-  LineOfCreditD toEntity(LineOfCredit lineOfCredit);
+  LineOfCredit toEntity(LineOfCreditD lineOfCreditD);
 }
