@@ -15,10 +15,15 @@ import java.util.List;
 public class CreditService implements IService<Credit, Credit> {
   @Inject
   CreditRepository repository;
-
   @Inject
   CreditMapper mapper;
 
+  /**
+   * Retorna todos los elementos guardados en la bd
+   * que no estén borrados (softDelete).
+   *
+   * @return Lista de elementos.
+   */
   @Override
   public List<Credit> getAll() {
     return repository.getAll()
@@ -28,6 +33,14 @@ public class CreditService implements IService<Credit, Credit> {
           .toList();
   }
 
+  /**
+   * Se busca por el id en la bd y de existir
+   * retorna el elemento, de lo contrario retorna
+   * null
+   *
+   * @param id Id del elemento en la BD.
+   * @return De existir el elemento lo retorna, de lo contrario null .
+   */
   @Override
   public Credit getById(Long id) {
     return repository.findByIdOptional(id)
@@ -36,11 +49,24 @@ public class CreditService implements IService<Credit, Credit> {
           .orElseThrow(() -> new NotFoundException());
   }
 
+  /**
+   * Crea un nuevo elemento en la BD
+   *
+   * @param credit El elemento a crear.
+   * @return El elemento creado.
+   */
   @Override
   public Credit create(Credit credit) {
     return mapper.toEntity(repository.save(mapper.toDto(credit)));
   }
 
+  /**
+   * Actualiza un elemento en la BD. Se busca por el Id.
+   *
+   * @param id     Identificador del elemento ha editar.
+   * @param credit Elemento con los datos para guardar.
+   * @return Retorna el elemento editado/actualizado.
+   */
   @Override
   public Credit update(Long id, Credit credit) {
     CreditD creditD = repository.findByIdOptional(id)
@@ -54,6 +80,12 @@ public class CreditService implements IService<Credit, Credit> {
     return mapper.toEntity(repository.save(creditD));
   }
 
+  /**
+   * Realiza la eliminación del elemento de manera logica (softDelete).
+   *
+   * @param id Identificador del elemento a eliminar.
+   * @return Retorna el elemento eliminado.
+   */
   @Override
   public Credit delete(Long id) {
     CreditD creditD = repository.findByIdOptional(id)

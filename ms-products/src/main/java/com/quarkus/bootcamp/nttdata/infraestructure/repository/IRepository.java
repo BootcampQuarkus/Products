@@ -4,6 +4,12 @@ import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 import java.util.List;
 
+/**
+ * Esta interfaz define los 4 metodos basicos que deben tener todos los repositorios.
+ *
+ * @param <T>
+ * @author pdiaz
+ */
 public interface IRepository<T> extends PanacheRepository<T> {
   /**
    * Se encarga de devolver todos los elementos no eliminados (softdelete)

@@ -1,14 +1,21 @@
 package com.quarkus.bootcamp.nttdata.domain.mapper;
 
 import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
-import com.quarkus.bootcamp.nttdata.domain.interfaces.mappers.ICreditMapper;
+import com.quarkus.bootcamp.nttdata.domain.interfaces.IMapper;
 import com.quarkus.bootcamp.nttdata.infraestructure.entity.CreditD;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class CreditMapper implements ICreditMapper {
+public class CreditMapper implements IMapper<Credit, CreditD> {
+  /**
+   * Transforma el objeto de Credit a CreditD.
+   *
+   * @param credit Objeto de la clase Credit que se desea transformar.
+   * @return Objeto de la clase CreditD.
+   * @throws NullPointerException
+   */
   @Override
-  public CreditD toDto(Credit credit) {
+  public CreditD toDto(Credit credit) throws NullPointerException {
     CreditD creditD = new CreditD();
     creditD.setAmount(credit.getAmount());
     creditD.setCutomerId(credit.getCutomerId());
@@ -18,9 +25,17 @@ public class CreditMapper implements ICreditMapper {
     return creditD;
   }
 
+  /**
+   * Transforma el objeto de CreditD a Credit.
+   *
+   * @param creditD Objeto de la clase CreditD que se desea transformar.
+   * @return Objeto de la clase Credit.
+   * @throws NullPointerException
+   */
   @Override
-  public Credit toEntity(CreditD creditD) {
+  public Credit toEntity(CreditD creditD) throws NullPointerException {
     Credit credit = new Credit();
+    credit.setId(creditD.id);
     credit.setAmount(creditD.getAmount());
     credit.setCutomerId(creditD.getCutomerId());
     credit.setBalance(creditD.getBalance());

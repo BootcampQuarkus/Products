@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Product {
+  protected Long id = null;
   /**
    * Monto registrado al momento de crear el producto
    * 1- Para las cuentas es el monto inicial.
@@ -22,9 +23,4 @@ public class Product {
    * Id del cliente al que le pertenece el producto
    */
   protected Long cutomerId;
-
-  public Product(Double amount, Long cutomerId) {
-    this.amount = amount;
-    this.cutomerId = cutomerId;
-  }
 }

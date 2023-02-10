@@ -1,9 +1,6 @@
 package com.quarkus.bootcamp.nttdata.application;
 
-import com.quarkus.bootcamp.nttdata.domain.entity.Account;
-import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
 import com.quarkus.bootcamp.nttdata.domain.entity.LineOfCredit;
-import com.quarkus.bootcamp.nttdata.domain.services.CreditService;
 import com.quarkus.bootcamp.nttdata.domain.services.LineOfCreditService;
 import io.quarkus.test.junit.QuarkusTest;
 import io.quarkus.test.junit.mockito.InjectMock;
@@ -16,7 +13,7 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+
 @QuarkusTest
 class LineOfCreditResourceTest {
   @InjectMock
@@ -50,6 +47,7 @@ class LineOfCreditResourceTest {
           .statusCode(200)
           .body(is(json));
   }
+
   @Test
   void getByIdValid() {
     String json = "{\"amount\":null,\"cutomerId\":null,\"available\":null,\"costs\":null,\"closingDate\":null,\"paymentDueDate\":null}";

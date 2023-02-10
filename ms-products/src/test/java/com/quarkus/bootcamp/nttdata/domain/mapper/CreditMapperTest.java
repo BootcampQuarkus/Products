@@ -12,18 +12,27 @@ class CreditMapperTest {
   @Inject
   CreditMapper mapper;
 
+  /**
+   * Cuando se envia un elemento null al metodo toDto debe retornar un NullPointerException.
+   */
   @Test
   public void toDtoNull() {
     Credit credit = null;
     Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(credit));
   }
 
+  /**
+   * Cuando se envia un elemento null al metodo toEntity debe retornar un NullPointerException.
+   */
   @Test
   public void toEntityNull() {
     CreditD creditD = null;
     Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(creditD));
   }
 
+  /**
+   * El metodo toDto debe retornar un Dto.
+   */
   @Test
   public void toDtoReturnDto() {
     Credit credit = new Credit();
@@ -31,6 +40,9 @@ class CreditMapperTest {
     Assertions.assertInstanceOf(CreditD.class, actual);
   }
 
+  /**
+   * El metodo toDto debe retornar un Entity.
+   */
   @Test
   public void toEntityReturnEntity() {
     CreditD creditD = new CreditD();
@@ -38,6 +50,9 @@ class CreditMapperTest {
     Assertions.assertInstanceOf(Credit.class, actual);
   }
 
+  /**
+   * Cuando se envia un elemento vacio al metodo toDto debe retornar un Dto vacio.
+   */
   @Test
   public void toDtoVoid() {
     Credit credit = new Credit();
@@ -46,6 +61,9 @@ class CreditMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento vacio al metodo toEntity debe retornar un Entity vacio.
+   */
   @Test
   public void toEntityVoid() {
     CreditD creditD = new CreditD();
@@ -54,6 +72,10 @@ class CreditMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento valido al metodo toDto debe retornar un Dto con los mismos datos en los campos
+   * amount, customerId, balance, due y paymentDueDate.
+   */
   @Test
   public void toDtoValid() {
     // Variables
@@ -85,6 +107,10 @@ class CreditMapperTest {
     Assertions.assertEquals(expected, actual);
   }
 
+  /**
+   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
+   * amount, customerId, balance, due y paymentDueDate.
+   */
   @Test
   public void toEntityValid() {
     // Variables
