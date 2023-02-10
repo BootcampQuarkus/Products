@@ -29,14 +29,14 @@ public class AccountResource {
   @POST
   @Transactional
   public Response create(Account account) {
-    return Response.ok(service.create(account)).build();
+    return Response.ok(service.create(account)).status(201).build();
   }
 
   @PUT
   @Path("{id}")
   @Transactional
   public Response update(@PathParam("id") Long id, Account account) {
-    return Response.ok(service.update(id, account)).build();
+    return Response.ok(service.update(id, account)).status(201).build();
   }
 
   @DELETE

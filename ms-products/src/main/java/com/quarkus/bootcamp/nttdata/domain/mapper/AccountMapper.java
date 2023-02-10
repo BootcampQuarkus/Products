@@ -8,7 +8,16 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class AccountMapper implements IAccountMapper {
   @Override
-  public Account toDto(AccountD accountD) {
+  public AccountD toDto(Account account) throws NullPointerException {
+    AccountD accountD = new AccountD();
+    accountD.setCardId(account.getCardId());
+    accountD.setAmount(account.getAmount());
+    accountD.setCutomerId(account.getCutomerId());
+    return accountD;
+  }
+
+  @Override
+  public Account toEntity(AccountD accountD) throws NullPointerException {
     Account account = new Account();
     account.setCardId(accountD.getCardId());
     account.setAmount(accountD.getAmount());
@@ -16,12 +25,4 @@ public class AccountMapper implements IAccountMapper {
     return account;
   }
 
-  @Override
-  public AccountD toEntity(Account account) {
-    AccountD accountD = new AccountD();
-    accountD.setCardId(account.getCardId());
-    accountD.setAmount(account.getAmount());
-    accountD.setCutomerId(account.getCutomerId());
-    return accountD;
-  }
 }

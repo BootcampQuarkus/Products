@@ -30,14 +30,14 @@ public class CreditResource {
   @POST
   @Transactional
   public Response create(Credit credit) {
-    return Response.ok(service.create(credit)).build();
+    return Response.ok(service.create(credit)).status(201).build();
   }
 
   @PUT
   @Path("{id}")
   @Transactional
   public Response update(@PathParam("id") Long id, Credit credit) {
-    return Response.ok(service.update(id, credit)).build();
+    return Response.ok(service.update(id, credit)).status(201).build();
   }
 
   @DELETE

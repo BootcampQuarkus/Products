@@ -29,14 +29,14 @@ public class LineOfCreditResource {
   @POST
   @Transactional
   public Response create(LineOfCredit lineofCredit) {
-    return Response.ok(service.create(lineofCredit)).build();
+    return Response.ok(service.create(lineofCredit)).status(201).build();
   }
 
   @PUT
   @Path("/{id}")
   @Transactional
   public Response update(@PathParam("id") Long id, LineOfCredit lineofCredit) {
-    return Response.ok(service.update(id, lineofCredit)).build();
+    return Response.ok(service.update(id, lineofCredit)).status(201).build();
   }
 
   @DELETE

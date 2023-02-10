@@ -8,19 +8,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class LineOfCreditMapper implements ILineOfCreditMapper {
   @Override
-  public LineOfCredit toDto(LineOfCreditD lineOfCreditD) {
-    LineOfCredit lineOfCredit = new LineOfCredit();
-    lineOfCredit.setAmount(lineOfCreditD.getAmount());
-    lineOfCredit.setAvailable(lineOfCreditD.getAvailable());
-    lineOfCredit.setClosingDate(lineOfCreditD.getClosingDate());
-    lineOfCredit.setCosts(lineOfCreditD.getCosts());
-    lineOfCredit.setCutomerId(lineOfCreditD.getCutomerId());
-    lineOfCredit.setPaymentDueDate(lineOfCreditD.getPaymentDueDate());
-    return lineOfCredit;
-  }
-
-  @Override
-  public LineOfCreditD toEntity(LineOfCredit lineOfCredit) {
+  public LineOfCreditD toDto(LineOfCredit lineOfCredit) {
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(lineOfCredit.getAmount());
     lineOfCreditD.setAvailable(lineOfCredit.getAvailable());
@@ -29,5 +17,17 @@ public class LineOfCreditMapper implements ILineOfCreditMapper {
     lineOfCreditD.setCutomerId(lineOfCredit.getCutomerId());
     lineOfCreditD.setPaymentDueDate(lineOfCredit.getPaymentDueDate());
     return lineOfCreditD;
+  }
+
+  @Override
+  public LineOfCredit toEntity(LineOfCreditD lineOfCreditD) {
+    LineOfCredit lineOfCredit = new LineOfCredit();
+    lineOfCredit.setAmount(lineOfCreditD.getAmount());
+    lineOfCredit.setAvailable(lineOfCreditD.getAvailable());
+    lineOfCredit.setClosingDate(lineOfCreditD.getClosingDate());
+    lineOfCredit.setCosts(lineOfCreditD.getCosts());
+    lineOfCredit.setCutomerId(lineOfCreditD.getCutomerId());
+    lineOfCredit.setPaymentDueDate(lineOfCreditD.getPaymentDueDate());
+    return lineOfCredit;
   }
 }
