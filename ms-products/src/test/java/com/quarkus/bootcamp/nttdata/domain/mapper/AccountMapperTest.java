@@ -86,7 +86,7 @@ class AccountMapperTest {
     // Input
     Account account = new Account();
     account.setAmount(amount);
-    account.setCutomerId(customerId);
+    account.setCustomerId(customerId);
     account.setCardId(cardId);
 
     // Resultado esperado
@@ -121,7 +121,7 @@ class AccountMapperTest {
     // Resultado esperado
     Account expected = new Account();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setCardId(cardId);
 
     // Ejecución

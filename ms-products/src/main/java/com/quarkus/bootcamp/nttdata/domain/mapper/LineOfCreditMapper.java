@@ -21,7 +21,7 @@ public class LineOfCreditMapper implements IMapper<LineOfCredit, LineOfCreditD> 
     lineOfCreditD.setAvailable(lineOfCredit.getAvailable());
     lineOfCreditD.setClosingDate(lineOfCredit.getClosingDate());
     lineOfCreditD.setCosts(lineOfCredit.getCosts());
-    lineOfCreditD.setCutomerId(lineOfCredit.getCutomerId());
+    lineOfCreditD.setCustomerId(lineOfCredit.getCustomerId());
     lineOfCreditD.setPaymentDueDate(lineOfCredit.getPaymentDueDate());
     return lineOfCreditD;
   }
@@ -41,7 +41,7 @@ public class LineOfCreditMapper implements IMapper<LineOfCredit, LineOfCreditD> 
     lineOfCredit.setAvailable(lineOfCreditD.getAvailable());
     lineOfCredit.setClosingDate(lineOfCreditD.getClosingDate());
     lineOfCredit.setCosts(lineOfCreditD.getCosts());
-    lineOfCredit.setCutomerId(lineOfCreditD.getCutomerId());
+    lineOfCredit.setCustomerId(lineOfCreditD.getCustomerId());
     lineOfCredit.setPaymentDueDate(lineOfCreditD.getPaymentDueDate());
     return lineOfCredit;
   }

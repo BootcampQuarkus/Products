@@ -135,7 +135,7 @@ class LineOfCreditServiceTest {
     // Input
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(amount);
-    lineOfCreditD.setCutomerId(customerId);
+    lineOfCreditD.setCustomerId(customerId);
     lineOfCreditD.setAvailable(available);
     lineOfCreditD.setCosts(cost);
     lineOfCreditD.setClosingDate(closingDate);
@@ -144,7 +144,7 @@ class LineOfCreditServiceTest {
     // Resultado esperado
     LineOfCredit expected = new LineOfCredit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setAvailable(available);
     expected.setCosts(cost);
     expected.setClosingDate(closingDate);
@@ -197,7 +197,7 @@ class LineOfCreditServiceTest {
     // Input
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setAmount(amount);
-    lineOfCredit.setCutomerId(customerId);
+    lineOfCredit.setCustomerId(customerId);
     lineOfCredit.setAvailable(available);
     lineOfCredit.setCosts(cost);
     lineOfCredit.setClosingDate(closingDate);
@@ -207,7 +207,7 @@ class LineOfCreditServiceTest {
     // Resultado esperado
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(amount);
-    lineOfCreditD.setCutomerId(customerId);
+    lineOfCreditD.setCustomerId(customerId);
     lineOfCreditD.setAvailable(available);
     lineOfCreditD.setCosts(cost);
     lineOfCreditD.setClosingDate(closingDate);
@@ -253,7 +253,7 @@ class LineOfCreditServiceTest {
     // Input
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setAmount(amountNew);
-    lineOfCredit.setCutomerId(customerIdNew);
+    lineOfCredit.setCustomerId(customerIdNew);
     lineOfCredit.setAvailable(availableNew);
     lineOfCredit.setCosts(costNew);
     lineOfCredit.setClosingDate(closingDateNew);
@@ -263,7 +263,7 @@ class LineOfCreditServiceTest {
     // Resultado esperado
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(amount);
-    lineOfCreditD.setCutomerId(customerId);
+    lineOfCreditD.setCustomerId(customerId);
     lineOfCreditD.setAvailable(available);
     lineOfCreditD.setCosts(cost);
     lineOfCreditD.setClosingDate(closingDate);
@@ -272,7 +272,7 @@ class LineOfCreditServiceTest {
     // --
     LineOfCreditD lineOfCreditDNew = new LineOfCreditD();
     lineOfCreditDNew.setAmount(amountNew);
-    lineOfCreditDNew.setCutomerId(customerIdNew);
+    lineOfCreditDNew.setCustomerId(customerIdNew);
     lineOfCreditDNew.setAvailable(availableNew);
     lineOfCreditDNew.setCosts(costNew);
     lineOfCreditDNew.setClosingDate(closingDateNew);
@@ -348,7 +348,7 @@ class LineOfCreditServiceTest {
     // Input
     LineOfCredit expected = new LineOfCredit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setAvailable(available);
     expected.setCosts(cost);
     expected.setClosingDate(closingDate);
@@ -357,7 +357,7 @@ class LineOfCreditServiceTest {
     // Resultado esperado
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(amount);
-    lineOfCreditD.setCutomerId(customerId);
+    lineOfCreditD.setCustomerId(customerId);
     lineOfCreditD.setAvailable(available);
     lineOfCreditD.setCosts(cost);
     lineOfCreditD.setClosingDate(closingDate);

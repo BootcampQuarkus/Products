@@ -24,7 +24,7 @@ public class LineOfCreditD extends PanacheEntity {
   /**
    * Id del cliente al que le pertenece el producto
    */
-  protected Long cutomerId;
+  protected Long customerId;
   /**
    * Saldo disponible en la linea de credito
    */

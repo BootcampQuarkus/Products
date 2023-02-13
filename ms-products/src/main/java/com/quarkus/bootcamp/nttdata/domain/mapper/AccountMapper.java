@@ -19,7 +19,7 @@ public class AccountMapper implements IMapper<Account, AccountD> {
     AccountD accountD = new AccountD();
     accountD.setCardId(account.getCardId());
     accountD.setAmount(account.getAmount());
-    accountD.setCutomerId(account.getCutomerId());
+    accountD.setCustomerId(account.getCustomerId());
     return accountD;
   }
 
@@ -36,7 +36,7 @@ public class AccountMapper implements IMapper<Account, AccountD> {
     account.setId(accountD.id);
     account.setCardId(accountD.getCardId());
     account.setAmount(accountD.getAmount());
-    account.setCutomerId(accountD.getCutomerId());
+    account.setCustomerId(accountD.getCustomerId());
     return account;
   }
 

@@ -24,7 +24,7 @@ public class AccountD extends PanacheEntity {
   /**
    * Id del cliente al que le pertenece el producto
    */
-  protected Long cutomerId;
+  protected Long customerId;
   /**
    * Id de la tarjeta vinculada a dicha cuenta
    */

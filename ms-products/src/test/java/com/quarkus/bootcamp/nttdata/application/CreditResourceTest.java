@@ -73,7 +73,7 @@ class CreditResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"balance\":300.00,\"dues\":5,\"paymentDueDate\":\"15\"}";
     Credit credit = new Credit();
     credit.setAmount(500.00);
-    credit.setCutomerId(101L);
+    credit.setCustomerId(101L);
     credit.setBalance(300.00);
     credit.setDues(5);
     credit.setPaymentDueDate("15");
@@ -98,7 +98,7 @@ class CreditResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"balance\":300.00,\"dues\":5,\"paymentDueDate\":\"15\"}";
     Credit credit = new Credit();
     credit.setAmount(500.00);
-    credit.setCutomerId(101L);
+    credit.setCustomerId(101L);
     credit.setBalance(300.00);
     credit.setDues(5);
     credit.setPaymentDueDate("15");
@@ -123,7 +123,7 @@ class CreditResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"balance\":300.00,\"dues\":5,\"paymentDueDate\":\"15\"}";
     Credit credit = new Credit();
     credit.setAmount(500.00);
-    credit.setCutomerId(101L);
+    credit.setCustomerId(101L);
     credit.setBalance(300.00);
     credit.setDues(5);
     credit.setPaymentDueDate("15");

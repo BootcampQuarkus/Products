@@ -73,7 +73,7 @@ class LineOfCreditResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"available\":300.00,\"costs\":200.00,\"closingDate\":\"10\",\"paymentDueDate\":\"15\"}";
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setAmount(500.00);
-    lineOfCredit.setCutomerId(101L);
+    lineOfCredit.setCustomerId(101L);
     lineOfCredit.setAvailable(300.00);
     lineOfCredit.setCosts(200.00);
     lineOfCredit.setClosingDate("10");
@@ -100,7 +100,7 @@ class LineOfCreditResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"available\":300.00,\"costs\":200.00,\"closingDate\":\"10\",\"paymentDueDate\":\"15\"}";
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setAmount(500.00);
-    lineOfCredit.setCutomerId(101L);
+    lineOfCredit.setCustomerId(101L);
     lineOfCredit.setAvailable(300.00);
     lineOfCredit.setCosts(200.00);
     lineOfCredit.setClosingDate("10");
@@ -127,7 +127,7 @@ class LineOfCreditResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"available\":300.00,\"costs\":200.00,\"closingDate\":\"10\",\"paymentDueDate\":\"15\"}";
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setAmount(500.00);
-    lineOfCredit.setCutomerId(101L);
+    lineOfCredit.setCustomerId(101L);
     lineOfCredit.setAvailable(300.00);
     lineOfCredit.setCosts(200.00);
     lineOfCredit.setClosingDate("10");

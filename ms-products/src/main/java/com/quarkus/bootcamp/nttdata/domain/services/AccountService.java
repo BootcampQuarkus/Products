@@ -74,7 +74,7 @@ public class AccountService implements IService<Account, Account> {
           .orElseThrow(() -> new NotFoundException());
     accountD.setCardId(account.getCardId());
     accountD.setAmount(account.getAmount());
-    accountD.setCutomerId(account.getCutomerId());
+    accountD.setCustomerId(account.getCustomerId());
     return mapper.toEntity(repository.save(accountD));
   }
 
