@@ -73,7 +73,7 @@ class AccountResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"cardId\":101}";
     Account account = new Account();
     account.setAmount(500.00);
-    account.setCutomerId(101L);
+    account.setCustomerId(101L);
     account.setCardId(101L);
     Mockito.when(service.create(account)).thenReturn(account);
 
@@ -94,7 +94,7 @@ class AccountResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"cardId\":101}";
     Account account = new Account();
     account.setAmount(500.00);
-    account.setCutomerId(101L);
+    account.setCustomerId(101L);
     account.setCardId(101L);
     Mockito.when(service.update(101L, account)).thenReturn(account);
 
@@ -115,7 +115,7 @@ class AccountResourceTest {
     String bodyRequest = "{\"amount\":500.00,\"cutomerId\":101,\"cardId\":101}";
     Account account = new Account();
     account.setAmount(500.00);
-    account.setCutomerId(101L);
+    account.setCustomerId(101L);
     account.setCardId(101L);
     Mockito.when(service.delete(101L)).thenReturn(account);
 

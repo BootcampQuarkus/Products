@@ -89,7 +89,7 @@ class LineOfCreditMapperTest {
     // Input
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setAmount(amount);
-    lineOfCredit.setCutomerId(customerId);
+    lineOfCredit.setCustomerId(customerId);
     lineOfCredit.setAvailable(available);
     lineOfCredit.setCosts(cost);
     lineOfCredit.setClosingDate(closingDate);
@@ -98,7 +98,7 @@ class LineOfCreditMapperTest {
     // Resultado esperado
     LineOfCreditD expected = new LineOfCreditD();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setAvailable(available);
     expected.setCosts(cost);
     expected.setClosingDate(closingDate);
@@ -127,7 +127,7 @@ class LineOfCreditMapperTest {
     // Input
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(amount);
-    lineOfCreditD.setCutomerId(customerId);
+    lineOfCreditD.setCustomerId(customerId);
     lineOfCreditD.setAvailable(available);
     lineOfCreditD.setCosts(cost);
     lineOfCreditD.setClosingDate(closingDate);
@@ -136,7 +136,7 @@ class LineOfCreditMapperTest {
     // Resultado esperado
     LineOfCredit expected = new LineOfCredit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setAvailable(available);
     expected.setCosts(cost);
     expected.setClosingDate(closingDate);

@@ -24,7 +24,7 @@ public class CreditD extends PanacheEntity {
   /**
    * Id del cliente al que le pertenece el producto
    */
-  protected Long cutomerId;
+  protected Long customerId;
   /**
    * El saldo por pagar
    */

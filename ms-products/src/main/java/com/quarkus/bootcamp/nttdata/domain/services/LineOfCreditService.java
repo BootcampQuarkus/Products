@@ -77,7 +77,7 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
     lineOfCreditD.setAmount(lineOfCredit.getAmount());
     lineOfCreditD.setClosingDate(lineOfCredit.getClosingDate());
     lineOfCreditD.setPaymentDueDate(lineOfCredit.getPaymentDueDate());
-    lineOfCreditD.setCutomerId(lineOfCredit.getCutomerId());
+    lineOfCreditD.setCustomerId(lineOfCredit.getCustomerId());
     return mapper.toEntity(repository.save(lineOfCreditD));
   }
 

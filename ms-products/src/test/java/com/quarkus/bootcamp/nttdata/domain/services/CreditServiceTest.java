@@ -134,7 +134,7 @@ class CreditServiceTest {
     // Input
     CreditD creditD = new CreditD();
     creditD.setAmount(amount);
-    creditD.setCutomerId(customerId);
+    creditD.setCustomerId(customerId);
     creditD.setBalance(balance);
     creditD.setDues(due);
     creditD.setPaymentDueDate(paymentDueDate);
@@ -142,7 +142,7 @@ class CreditServiceTest {
     // Resultado esperado
     Credit expected = new Credit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setBalance(balance);
     expected.setDues(due);
     expected.setPaymentDueDate(paymentDueDate);
@@ -168,7 +168,7 @@ class CreditServiceTest {
     // Input
     CreditD creditD = new CreditD();
     creditD.setAmount(amount);
-    creditD.setCutomerId(customerId);
+    creditD.setCustomerId(customerId);
     creditD.setBalance(balance);
     creditD.setDues(due);
     creditD.setPaymentDueDate(paymentDueDate);
@@ -177,7 +177,7 @@ class CreditServiceTest {
     // Resultado esperado
     Credit expected = new Credit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setBalance(balance);
     expected.setDues(due);
     expected.setPaymentDueDate(paymentDueDate);
@@ -210,7 +210,7 @@ class CreditServiceTest {
     // Input
     Credit credit = new Credit();
     credit.setAmount(amount);
-    credit.setCutomerId(customerId);
+    credit.setCustomerId(customerId);
     credit.setBalance(balance);
     credit.setDues(due);
     credit.setPaymentDueDate(paymentDueDate);
@@ -219,7 +219,7 @@ class CreditServiceTest {
     // Resultado esperado
     CreditD creditD = new CreditD();
     creditD.setAmount(amount);
-    creditD.setCutomerId(customerId);
+    creditD.setCustomerId(customerId);
     creditD.setBalance(balance);
     creditD.setDues(due);
     creditD.setPaymentDueDate(paymentDueDate);
@@ -261,7 +261,7 @@ class CreditServiceTest {
     // Input
     Credit credit = new Credit();
     credit.setAmount(amountNew);
-    credit.setCutomerId(customerIdNew);
+    credit.setCustomerId(customerIdNew);
     credit.setBalance(balanceNew);
     credit.setDues(dueNew);
     credit.setPaymentDueDate(paymentDueDateNew);
@@ -270,7 +270,7 @@ class CreditServiceTest {
     // Resultado esperado
     CreditD creditD = new CreditD();
     creditD.setAmount(amount);
-    creditD.setCutomerId(customerId);
+    creditD.setCustomerId(customerId);
     creditD.setBalance(balance);
     creditD.setDues(due);
     creditD.setPaymentDueDate(paymentDueDate);
@@ -278,7 +278,7 @@ class CreditServiceTest {
     // --
     CreditD creditDNew = new CreditD();
     creditDNew.setAmount(amountNew);
-    creditDNew.setCutomerId(customerIdNew);
+    creditDNew.setCustomerId(customerIdNew);
     creditDNew.setBalance(balanceNew);
     creditDNew.setDues(dueNew);
     creditDNew.setPaymentDueDate(paymentDueDateNew);
@@ -353,7 +353,7 @@ class CreditServiceTest {
     // Input
     Credit expected = new Credit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setBalance(balance);
     expected.setDues(due);
     expected.setPaymentDueDate(paymentDueDate);
@@ -361,7 +361,7 @@ class CreditServiceTest {
     // Resultado esperado
     CreditD creditD = new CreditD();
     creditD.setAmount(amount);
-    creditD.setCutomerId(customerId);
+    creditD.setCustomerId(customerId);
     creditD.setBalance(balance);
     creditD.setDues(due);
     creditD.setPaymentDueDate(paymentDueDate);

@@ -137,7 +137,7 @@ class AccountServiceTest {
     // Resultado esperado
     Account expected = new Account();
     expected.setAmount(amount);
-    expected.setCutomerId(id);
+    expected.setCustomerId(id);
     expected.setCardId(cardId);
 
     Mockito.when(repository.findByIdOptional(id)).thenReturn(Optional.of(accountD));
@@ -183,7 +183,7 @@ class AccountServiceTest {
     // Input
     Account account = new Account();
     account.setAmount(amount);
-    account.setCutomerId(customerId);
+    account.setCustomerId(customerId);
     account.setCardId(cardId);
     Account expected = account;
 
@@ -227,7 +227,7 @@ class AccountServiceTest {
     // Input
     Account account = new Account();
     account.setAmount(amountNew);
-    account.setCutomerId(customerIdNew);
+    account.setCustomerId(customerIdNew);
     account.setCardId(cardIdNew);
     Account expected = account;
 
@@ -309,7 +309,7 @@ class AccountServiceTest {
 
     Account expected = new Account();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setCardId(cardId);
 
     AccountD accountD = new AccountD();

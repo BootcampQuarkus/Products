@@ -88,7 +88,7 @@ class CreditMapperTest {
     // Input
     Credit credit = new Credit();
     credit.setAmount(amount);
-    credit.setCutomerId(customerId);
+    credit.setCustomerId(customerId);
     credit.setBalance(balance);
     credit.setDues(due);
     credit.setPaymentDueDate(paymentDueDate);
@@ -96,7 +96,7 @@ class CreditMapperTest {
     // Resultado esperado
     CreditD expected = new CreditD();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setBalance(balance);
     expected.setDues(due);
     expected.setPaymentDueDate(paymentDueDate);
@@ -123,7 +123,7 @@ class CreditMapperTest {
     // Input
     CreditD creditD = new CreditD();
     creditD.setAmount(amount);
-    creditD.setCutomerId(customerId);
+    creditD.setCustomerId(customerId);
     creditD.setBalance(balance);
     creditD.setDues(due);
     creditD.setPaymentDueDate(paymentDueDate);
@@ -131,7 +131,7 @@ class CreditMapperTest {
     // Resultado esperado
     Credit expected = new Credit();
     expected.setAmount(amount);
-    expected.setCutomerId(customerId);
+    expected.setCustomerId(customerId);
     expected.setBalance(balance);
     expected.setDues(due);
     expected.setPaymentDueDate(paymentDueDate);

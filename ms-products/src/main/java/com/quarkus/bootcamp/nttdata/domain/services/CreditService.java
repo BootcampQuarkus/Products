@@ -73,7 +73,7 @@ public class CreditService implements IService<Credit, Credit> {
           .filter(p -> (p.getDeletedAt() == null))
           .orElseThrow(() -> new NotFoundException());
     creditD.setAmount(credit.getAmount());
-    creditD.setCutomerId(credit.getCutomerId());
+    creditD.setCustomerId(credit.getCustomerId());
     creditD.setBalance(credit.getBalance());
     creditD.setDues(credit.getDues());
     creditD.setPaymentDueDate(credit.getPaymentDueDate());

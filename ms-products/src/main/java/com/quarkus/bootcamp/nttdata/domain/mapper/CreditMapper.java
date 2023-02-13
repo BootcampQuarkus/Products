@@ -18,7 +18,7 @@ public class CreditMapper implements IMapper<Credit, CreditD> {
   public CreditD toDto(Credit credit) throws NullPointerException {
     CreditD creditD = new CreditD();
     creditD.setAmount(credit.getAmount());
-    creditD.setCutomerId(credit.getCutomerId());
+    creditD.setCustomerId(credit.getCustomerId());
     creditD.setBalance(credit.getBalance());
     creditD.setDues(credit.getDues());
     creditD.setPaymentDueDate(credit.getPaymentDueDate());
@@ -37,7 +37,7 @@ public class CreditMapper implements IMapper<Credit, CreditD> {
     Credit credit = new Credit();
     credit.setId(creditD.id);
     credit.setAmount(creditD.getAmount());
-    credit.setCutomerId(creditD.getCutomerId());
+    credit.setCustomerId(creditD.getCustomerId());
     credit.setBalance(creditD.getBalance());
     credit.setDues(creditD.getDues());
     credit.setPaymentDueDate(creditD.getPaymentDueDate());
