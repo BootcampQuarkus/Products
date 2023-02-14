@@ -1,5 +1,6 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.domain.Util;
 import com.quarkus.bootcamp.nttdata.domain.entity.LineOfCredit;
 import com.quarkus.bootcamp.nttdata.domain.interfaces.IService;
 import com.quarkus.bootcamp.nttdata.domain.mapper.LineOfCreditMapper;
@@ -17,6 +18,8 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
   LineOfCreditRepository repository;
   @Inject
   LineOfCreditMapper mapper;
+  @Inject
+  Util util;
 
   /**
    * Retorna todos los elementos guardados en la bd
@@ -57,6 +60,7 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
    */
   @Override
   public LineOfCredit create(LineOfCredit lineOfCredit) {
+    util.validateCustomer(lineOfCredit.getCustomerId());
     return mapper.toEntity(repository.save(mapper.toDto(lineOfCredit)));
   }
 
@@ -69,6 +73,7 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
    */
   @Override
   public LineOfCredit update(Long id, LineOfCredit lineOfCredit) {
+    util.validateCustomer(lineOfCredit.getCustomerId());
     LineOfCreditD lineOfCreditD = repository.findByIdOptional(id)
           .filter(p -> (p.getDeletedAt() == null))
           .orElseThrow(() -> new NotFoundException());

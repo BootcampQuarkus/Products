@@ -2,11 +2,14 @@ package com.quarkus.bootcamp.nttdata.application;
 
 import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.services.AccountService;
+import com.quarkus.bootcamp.nttdata.infraestructure.resource.IBodyCorporateApi;
+import com.quarkus.bootcamp.nttdata.infraestructure.resource.INaturalPersonApi;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @Path("/accounts")
 @Produces(MediaType.APPLICATION_JSON)
@@ -14,6 +17,10 @@ import jakarta.ws.rs.core.Response;
 public class AccountResource {
   @Inject
   AccountService service;
+  @RestClient
+  INaturalPersonApi npApi;
+  @RestClient
+  IBodyCorporateApi bcApi;
 
   @GET
   public Response getAll() {
@@ -44,5 +51,17 @@ public class AccountResource {
   @Transactional
   public Response delete(@PathParam("id") Long id) {
     return Response.ok(service.delete(id)).build();
+  }
+
+  @GET
+  @Path("/naturalperson")
+  public Response getNp() {
+    return Response.ok(npApi.getAll()).build();
+  }
+
+  @GET
+  @Path("/bodycorporate")
+  public Response getBc() {
+    return Response.ok(bcApi.getAll()).build();
   }
 }

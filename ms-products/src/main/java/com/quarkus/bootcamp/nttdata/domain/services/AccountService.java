@@ -1,5 +1,6 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.domain.Util;
 import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.interfaces.IService;
 import com.quarkus.bootcamp.nttdata.domain.mapper.AccountMapper;
@@ -17,6 +18,8 @@ public class AccountService implements IService<Account, Account> {
   AccountRepository repository;
   @Inject
   AccountMapper mapper;
+  @Inject
+  Util util;
 
   /**
    * Retorna todos los elementos guardados en la bd
@@ -57,6 +60,7 @@ public class AccountService implements IService<Account, Account> {
    */
   @Override
   public Account create(Account account) {
+    util.validateCustomer(account.getCustomerId());
     return mapper.toEntity(repository.save(mapper.toDto(account)));
   }
 
@@ -69,6 +73,7 @@ public class AccountService implements IService<Account, Account> {
    */
   @Override
   public Account update(Long id, Account account) {
+    util.validateCustomer(account.getCustomerId());
     AccountD accountD = repository.findByIdOptional(id)
           .filter(p -> (p.getDeletedAt() == null))
           .orElseThrow(() -> new NotFoundException());
