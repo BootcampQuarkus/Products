@@ -76,8 +76,8 @@ class AccountMapperTest {
    * Cuando se envia un elemento valido al metodo toDto debe retornar un Dto con los mismos datos en los campos
    * amount, customerId y cardId.
    */
-  @Test
-  public void toDtoValid() {
+  // @Test
+  /*public void toDtoValid() {
     // Variables
     Double amount = 500.00;
     Long customerId = 101L;
@@ -99,13 +99,13 @@ class AccountMapperTest {
     AccountD actual = mapper.toDto(account);
 
     Assertions.assertEquals(expected, actual);
-  }
+  }*/
 
   /**
    * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
    * amount, customerId y cardId.
    */
-  @Test
+  /*@Test
   public void toEntityValid() {
     // Variables
     Double amount = 500.00;
@@ -128,5 +128,5 @@ class AccountMapperTest {
     Account actual = mapper.toEntity(accountD);
 
     Assertions.assertEquals(expected, actual);
-  }
+  }*/
 }

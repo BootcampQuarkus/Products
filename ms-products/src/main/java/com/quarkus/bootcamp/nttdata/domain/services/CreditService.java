@@ -1,5 +1,6 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.domain.Util;
 import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
 import com.quarkus.bootcamp.nttdata.domain.interfaces.IService;
 import com.quarkus.bootcamp.nttdata.domain.mapper.CreditMapper;
@@ -17,6 +18,8 @@ public class CreditService implements IService<Credit, Credit> {
   CreditRepository repository;
   @Inject
   CreditMapper mapper;
+  @Inject
+  Util util;
 
   /**
    * Retorna todos los elementos guardados en la bd
@@ -57,6 +60,7 @@ public class CreditService implements IService<Credit, Credit> {
    */
   @Override
   public Credit create(Credit credit) {
+    util.validateCustomer(credit.getCustomerId());
     return mapper.toEntity(repository.save(mapper.toDto(credit)));
   }
 
@@ -69,6 +73,7 @@ public class CreditService implements IService<Credit, Credit> {
    */
   @Override
   public Credit update(Long id, Credit credit) {
+    util.validateCustomer(credit.getCustomerId());
     CreditD creditD = repository.findByIdOptional(id)
           .filter(p -> (p.getDeletedAt() == null))
           .orElseThrow(() -> new NotFoundException());
