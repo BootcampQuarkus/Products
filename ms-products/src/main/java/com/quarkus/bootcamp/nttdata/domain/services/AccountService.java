@@ -1,5 +1,7 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.AccountNotFoundException;
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.CustomerNotFoundException;
 import com.quarkus.bootcamp.nttdata.domain.Util;
 import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.interfaces.IService;
@@ -8,7 +10,6 @@ import com.quarkus.bootcamp.nttdata.infraestructure.entity.AccountD;
 import com.quarkus.bootcamp.nttdata.infraestructure.repository.AccountRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -31,8 +32,16 @@ public class AccountService implements IService<Account, Account> {
   public List<Account> getAll() {
     return repository.getAll()
           .stream()
-          .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toEntity(p))
+          .filter(util::notDelete)
+          .map(mapper::toDto)
+          .toList();
+  }
+
+  public List<Account> getAll(Long customerId) {
+    return repository.findByCustomerId(customerId)
+          .stream()
+          .filter(util::notDelete)
+          .map(mapper::toDto)
           .toList();
   }
 
@@ -45,11 +54,11 @@ public class AccountService implements IService<Account, Account> {
    * @return De existir el elemento lo retorna, de lo contrario null .
    */
   @Override
-  public Account getById(Long id) {
+  public Account getById(Long id) throws AccountNotFoundException {
     return repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toEntity(p))
-          .orElseThrow(() -> new NotFoundException());
+          .filter(util::notDelete)
+          .map(mapper::toDto)
+          .orElseThrow(() -> new AccountNotFoundException("Account not found."));
   }
 
   /**
@@ -59,9 +68,9 @@ public class AccountService implements IService<Account, Account> {
    * @return El elemento creado.
    */
   @Override
-  public Account create(Account account) {
+  public Account create(Account account) throws CustomerNotFoundException {
     util.validateCustomer(account.getCustomerId());
-    return mapper.toEntity(repository.save(mapper.toDto(account)));
+    return mapper.toDto(repository.save(mapper.toEntity(account)));
   }
 
   /**
@@ -72,15 +81,15 @@ public class AccountService implements IService<Account, Account> {
    * @return Retorna el elemento editado/actualizado.
    */
   @Override
-  public Account update(Long id, Account account) {
+  public Account update(Long id, Account account) throws CustomerNotFoundException, AccountNotFoundException {
     util.validateCustomer(account.getCustomerId());
     AccountD accountD = repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .orElseThrow(() -> new NotFoundException());
+          .filter(util::notDelete)
+          .orElseThrow(() -> new AccountNotFoundException("Account not found."));
     accountD.setCardId(account.getCardId());
     accountD.setAmount(account.getAmount());
     accountD.setCustomerId(account.getCustomerId());
-    return mapper.toEntity(repository.save(accountD));
+    return mapper.toDto(repository.save(accountD));
   }
 
   /**
@@ -90,10 +99,11 @@ public class AccountService implements IService<Account, Account> {
    * @return Retorna el elemento eliminado.
    */
   @Override
-  public Account delete(Long id) {
+  public Account delete(Long id) throws AccountNotFoundException {
     AccountD accountD = repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .orElseThrow(() -> new NotFoundException());
-    return mapper.toEntity(repository.softDelete(accountD));
+          .filter(util::notDelete)
+          .orElseThrow(() -> new AccountNotFoundException("Account not found."));
+    return mapper.toDto(repository.softDelete(accountD));
   }
+
 }

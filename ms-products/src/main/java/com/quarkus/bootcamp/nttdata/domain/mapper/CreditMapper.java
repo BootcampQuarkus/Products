@@ -15,7 +15,7 @@ public class CreditMapper implements IMapper<Credit, CreditD> {
    * @throws NullPointerException
    */
   @Override
-  public CreditD toDto(Credit credit) throws NullPointerException {
+  public CreditD toEntity(Credit credit) throws NullPointerException {
     CreditD creditD = new CreditD();
     creditD.setAmount(credit.getAmount());
     creditD.setCustomerId(credit.getCustomerId());
@@ -33,7 +33,7 @@ public class CreditMapper implements IMapper<Credit, CreditD> {
    * @throws NullPointerException
    */
   @Override
-  public Credit toEntity(CreditD creditD) throws NullPointerException {
+  public Credit toDto(CreditD creditD) throws NullPointerException {
     Credit credit = new Credit();
     credit.setId(creditD.id);
     credit.setAmount(creditD.getAmount());

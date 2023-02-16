@@ -1,5 +1,6 @@
 package com.quarkus.bootcamp.nttdata.infraestructure.repository;
 
+import com.quarkus.bootcamp.nttdata.infraestructure.entity.AccountD;
 import com.quarkus.bootcamp.nttdata.infraestructure.entity.LineOfCreditD;
 import jakarta.enterprise.context.ApplicationScoped;
 
@@ -72,5 +73,10 @@ public class LineOfCreditRepository implements IRepository<LineOfCreditD> {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("uuuu.MM.dd.HH:mm:ss");
     lineOfCreditD.setDeletedAt(ZonedDateTime.now(ZoneId.systemDefault()).format(formatter));
     return this.save(lineOfCreditD);
+  }
+
+  public List<LineOfCreditD> findByCustomerId(Long id) {
+    return LineOfCreditD.find("customerId", id)
+          .list();
   }
 }

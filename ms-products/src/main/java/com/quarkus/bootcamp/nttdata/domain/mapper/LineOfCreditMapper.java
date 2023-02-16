@@ -15,7 +15,7 @@ public class LineOfCreditMapper implements IMapper<LineOfCredit, LineOfCreditD> 
    * @throws NullPointerException
    */
   @Override
-  public LineOfCreditD toDto(LineOfCredit lineOfCredit) throws NullPointerException {
+  public LineOfCreditD toEntity(LineOfCredit lineOfCredit) throws NullPointerException {
     LineOfCreditD lineOfCreditD = new LineOfCreditD();
     lineOfCreditD.setAmount(lineOfCredit.getAmount());
     lineOfCreditD.setAvailable(lineOfCredit.getAvailable());
@@ -34,7 +34,7 @@ public class LineOfCreditMapper implements IMapper<LineOfCredit, LineOfCreditD> 
    * @throws NullPointerException
    */
   @Override
-  public LineOfCredit toEntity(LineOfCreditD lineOfCreditD) throws NullPointerException {
+  public LineOfCredit toDto(LineOfCreditD lineOfCreditD) throws NullPointerException {
     LineOfCredit lineOfCredit = new LineOfCredit();
     lineOfCredit.setId(lineOfCreditD.id);
     lineOfCredit.setAmount(lineOfCreditD.getAmount());

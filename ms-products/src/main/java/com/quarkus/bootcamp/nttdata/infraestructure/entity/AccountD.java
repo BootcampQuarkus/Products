@@ -35,7 +35,7 @@ public class AccountD extends PanacheEntity {
   @Column(nullable = true)
   protected String createdAt = null;
   /**
-   * Fecha de la ultima actualización la cuenta.
+   * Fecha de la ultima actualización de la cuenta.
    */
   @Column(nullable = true)
   protected String updatedAt = null;

@@ -1,6 +1,9 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.CreditNotFoundException;
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.CustomerNotFoundException;
 import com.quarkus.bootcamp.nttdata.domain.Util;
+import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
 import com.quarkus.bootcamp.nttdata.domain.interfaces.IService;
 import com.quarkus.bootcamp.nttdata.domain.mapper.CreditMapper;
@@ -8,7 +11,6 @@ import com.quarkus.bootcamp.nttdata.infraestructure.entity.CreditD;
 import com.quarkus.bootcamp.nttdata.infraestructure.repository.CreditRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -31,8 +33,16 @@ public class CreditService implements IService<Credit, Credit> {
   public List<Credit> getAll() {
     return repository.getAll()
           .stream()
-          .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toEntity(p))
+          .filter(util::notDelete)
+          .map(mapper::toDto)
+          .toList();
+  }
+
+  public List<Credit> getAll(Long customerId) {
+    return repository.findByCustomerId(customerId)
+          .stream()
+          .filter(util::notDelete)
+          .map(mapper::toDto)
           .toList();
   }
 
@@ -45,11 +55,11 @@ public class CreditService implements IService<Credit, Credit> {
    * @return De existir el elemento lo retorna, de lo contrario null .
    */
   @Override
-  public Credit getById(Long id) {
+  public Credit getById(Long id) throws CreditNotFoundException {
     return repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toEntity(p))
-          .orElseThrow(() -> new NotFoundException());
+          .filter(util::notDelete)
+          .map(mapper::toDto)
+          .orElseThrow(() -> new CreditNotFoundException("Credit not found."));
   }
 
   /**
@@ -59,9 +69,9 @@ public class CreditService implements IService<Credit, Credit> {
    * @return El elemento creado.
    */
   @Override
-  public Credit create(Credit credit) {
+  public Credit create(Credit credit) throws CustomerNotFoundException {
     util.validateCustomer(credit.getCustomerId());
-    return mapper.toEntity(repository.save(mapper.toDto(credit)));
+    return mapper.toDto(repository.save(mapper.toEntity(credit)));
   }
 
   /**
@@ -72,17 +82,17 @@ public class CreditService implements IService<Credit, Credit> {
    * @return Retorna el elemento editado/actualizado.
    */
   @Override
-  public Credit update(Long id, Credit credit) {
+  public Credit update(Long id, Credit credit) throws CustomerNotFoundException, CreditNotFoundException {
     util.validateCustomer(credit.getCustomerId());
     CreditD creditD = repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .orElseThrow(() -> new NotFoundException());
+          .filter(util::notDelete)
+          .orElseThrow(() -> new CreditNotFoundException("Credit not found."));
     creditD.setAmount(credit.getAmount());
     creditD.setCustomerId(credit.getCustomerId());
     creditD.setBalance(credit.getBalance());
     creditD.setDues(credit.getDues());
     creditD.setPaymentDueDate(credit.getPaymentDueDate());
-    return mapper.toEntity(repository.save(creditD));
+    return mapper.toDto(repository.save(creditD));
   }
 
   /**
@@ -92,10 +102,10 @@ public class CreditService implements IService<Credit, Credit> {
    * @return Retorna el elemento eliminado.
    */
   @Override
-  public Credit delete(Long id) {
+  public Credit delete(Long id) throws CreditNotFoundException {
     CreditD creditD = repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .orElseThrow(() -> new NotFoundException());
-    return mapper.toEntity(repository.softDelete(creditD));
+          .filter(util::notDelete)
+          .orElseThrow(() -> new CreditNotFoundException("Credit not found."));
+    return mapper.toDto(repository.softDelete(creditD));
   }
 }
