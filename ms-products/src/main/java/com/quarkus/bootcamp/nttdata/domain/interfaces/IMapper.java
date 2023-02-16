@@ -15,7 +15,7 @@ public interface IMapper<T, U> {
    * @param t Objeto de la clase T que se desea transformar.
    * @return Objeto de la clase U.
    */
-  U toDto(T t) throws NullPointerException;
+  U toEntity(T t) throws NullPointerException;
 
   /**
    * Transforma el objeto de U a T.
@@ -23,6 +23,6 @@ public interface IMapper<T, U> {
    * @param u Objeto de la clase U que se desea transformar.
    * @return Objeto de la clase T.
    */
-  T toEntity(U u) throws NullPointerException;
+  T toDto(U u) throws NullPointerException;
 
 }

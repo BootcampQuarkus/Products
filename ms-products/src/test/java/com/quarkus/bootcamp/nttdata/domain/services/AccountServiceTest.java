@@ -1,20 +1,6 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
-import com.quarkus.bootcamp.nttdata.domain.entity.Account;
-import com.quarkus.bootcamp.nttdata.domain.mapper.AccountMapper;
-import com.quarkus.bootcamp.nttdata.infraestructure.entity.AccountD;
-import com.quarkus.bootcamp.nttdata.infraestructure.repository.AccountRepository;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
-import jakarta.inject.Inject;
-import jakarta.ws.rs.NotFoundException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @QuarkusTest
 class AccountServiceTest {/*

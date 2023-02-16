@@ -17,8 +17,8 @@ class CreditMapperTest {
    */
   @Test
   public void toDtoNull() {
-    Credit credit = null;
-    Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(credit));
+    CreditD creditD = null;
+    Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(creditD));
   }
 
   /**
@@ -26,8 +26,8 @@ class CreditMapperTest {
    */
   @Test
   public void toEntityNull() {
-    CreditD creditD = null;
-    Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(creditD));
+    Credit credit = null;
+    Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(credit));
   }
 
   /**
@@ -35,9 +35,9 @@ class CreditMapperTest {
    */
   @Test
   public void toDtoReturnDto() {
-    Credit credit = new Credit();
-    CreditD actual = mapper.toDto(credit);
-    Assertions.assertInstanceOf(CreditD.class, actual);
+    CreditD creditD = new CreditD();
+    Credit actual = mapper.toDto(creditD);
+    Assertions.assertInstanceOf(Credit.class, actual);
   }
 
   /**
@@ -45,9 +45,9 @@ class CreditMapperTest {
    */
   @Test
   public void toEntityReturnEntity() {
-    CreditD creditD = new CreditD();
-    Credit actual = mapper.toEntity(creditD);
-    Assertions.assertInstanceOf(Credit.class, actual);
+    Credit credit = new Credit();
+    CreditD actual = mapper.toEntity(credit);
+    Assertions.assertInstanceOf(CreditD.class, actual);
   }
 
   /**
@@ -55,9 +55,9 @@ class CreditMapperTest {
    */
   @Test
   public void toDtoVoid() {
-    Credit credit = new Credit();
-    CreditD expected = new CreditD();
-    CreditD actual = mapper.toDto(credit);
+    CreditD creditD = new CreditD();
+    Credit expected = new Credit();
+    Credit actual = mapper.toDto(creditD);
     Assertions.assertEquals(expected, actual);
   }
 
@@ -66,9 +66,9 @@ class CreditMapperTest {
    */
   @Test
   public void toEntityVoid() {
-    CreditD creditD = new CreditD();
-    Credit expected = new Credit();
-    Credit actual = mapper.toEntity(creditD);
+    Credit credit = new Credit();
+    CreditD expected = new CreditD();
+    CreditD actual = mapper.toEntity(credit);
     Assertions.assertEquals(expected, actual);
   }
 
@@ -78,41 +78,6 @@ class CreditMapperTest {
    */
   @Test
   public void toDtoValid() {
-    // Variables
-    Double amount = 500.00;
-    Long customerId = 101L;
-    Double balance = 300.00;
-    Integer due = 5;
-    String paymentDueDate = "10";
-
-    // Input
-    Credit credit = new Credit();
-    credit.setAmount(amount);
-    credit.setCustomerId(customerId);
-    credit.setBalance(balance);
-    credit.setDues(due);
-    credit.setPaymentDueDate(paymentDueDate);
-
-    // Resultado esperado
-    CreditD expected = new CreditD();
-    expected.setAmount(amount);
-    expected.setCustomerId(customerId);
-    expected.setBalance(balance);
-    expected.setDues(due);
-    expected.setPaymentDueDate(paymentDueDate);
-
-    // Ejecución
-    CreditD actual = mapper.toDto(credit);
-
-    Assertions.assertEquals(expected, actual);
-  }
-
-  /**
-   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
-   * amount, customerId, balance, due y paymentDueDate.
-   */
-  @Test
-  public void toEntityValid() {
     // Variables
     Double amount = 500.00;
     Long customerId = 101L;
@@ -137,7 +102,42 @@ class CreditMapperTest {
     expected.setPaymentDueDate(paymentDueDate);
 
     // Ejecución
-    Credit actual = mapper.toEntity(creditD);
+    Credit actual = mapper.toDto(creditD);
+
+    Assertions.assertEquals(expected, actual);
+  }
+
+  /**
+   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
+   * amount, customerId, balance, due y paymentDueDate.
+   */
+  @Test
+  public void toEntityValid() {
+    // Variables
+    Double amount = 500.00;
+    Long customerId = 101L;
+    Double balance = 300.00;
+    Integer due = 5;
+    String paymentDueDate = "10";
+
+    // Input
+    Credit credit = new Credit();
+    credit.setAmount(amount);
+    credit.setCustomerId(customerId);
+    credit.setBalance(balance);
+    credit.setDues(due);
+    credit.setPaymentDueDate(paymentDueDate);
+
+    // Resultado esperado
+    CreditD expected = new CreditD();
+    expected.setAmount(amount);
+    expected.setCustomerId(customerId);
+    expected.setBalance(balance);
+    expected.setDues(due);
+    expected.setPaymentDueDate(paymentDueDate);
+
+    // Ejecución
+    CreditD actual = mapper.toEntity(credit);
 
     Assertions.assertEquals(expected, actual);
   }

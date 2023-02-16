@@ -1,6 +1,9 @@
 package com.quarkus.bootcamp.nttdata.domain.services;
 
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.CustomerNotFoundException;
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.LineOfCreditNotFoundException;
 import com.quarkus.bootcamp.nttdata.domain.Util;
+import com.quarkus.bootcamp.nttdata.domain.entity.Account;
 import com.quarkus.bootcamp.nttdata.domain.entity.LineOfCredit;
 import com.quarkus.bootcamp.nttdata.domain.interfaces.IService;
 import com.quarkus.bootcamp.nttdata.domain.mapper.LineOfCreditMapper;
@@ -8,7 +11,6 @@ import com.quarkus.bootcamp.nttdata.infraestructure.entity.LineOfCreditD;
 import com.quarkus.bootcamp.nttdata.infraestructure.repository.LineOfCreditRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.NotFoundException;
 
 import java.util.List;
 
@@ -31,8 +33,16 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
   public List<LineOfCredit> getAll() {
     return repository.getAll()
           .stream()
-          .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toEntity(p))
+          .filter(util::notDelete)
+          .map(mapper::toDto)
+          .toList();
+  }
+
+  public List<LineOfCredit> getAll(Long customerId) {
+    return repository.findByCustomerId(customerId)
+          .stream()
+          .filter(util::notDelete)
+          .map(mapper::toDto)
           .toList();
   }
 
@@ -45,11 +55,11 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
    * @return De existir el elemento lo retorna, de lo contrario null .
    */
   @Override
-  public LineOfCredit getById(Long id) {
+  public LineOfCredit getById(Long id) throws LineOfCreditNotFoundException {
     return repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .map(p -> mapper.toEntity(p))
-          .orElseThrow(() -> new NotFoundException());
+          .filter(util::notDelete)
+          .map(mapper::toDto)
+          .orElseThrow(() -> new LineOfCreditNotFoundException("Line of credit not found."));
   }
 
   /**
@@ -59,9 +69,9 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
    * @return El elemento creado.
    */
   @Override
-  public LineOfCredit create(LineOfCredit lineOfCredit) {
+  public LineOfCredit create(LineOfCredit lineOfCredit) throws CustomerNotFoundException {
     util.validateCustomer(lineOfCredit.getCustomerId());
-    return mapper.toEntity(repository.save(mapper.toDto(lineOfCredit)));
+    return mapper.toDto(repository.save(mapper.toEntity(lineOfCredit)));
   }
 
   /**
@@ -72,18 +82,18 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
    * @return Retorna el elemento editado/actualizado.
    */
   @Override
-  public LineOfCredit update(Long id, LineOfCredit lineOfCredit) {
+  public LineOfCredit update(Long id, LineOfCredit lineOfCredit) throws CustomerNotFoundException, LineOfCreditNotFoundException {
     util.validateCustomer(lineOfCredit.getCustomerId());
     LineOfCreditD lineOfCreditD = repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .orElseThrow(() -> new NotFoundException());
+          .filter(util::notDelete)
+          .orElseThrow(() -> new LineOfCreditNotFoundException("Line of credit not found."));
     lineOfCreditD.setAvailable(lineOfCredit.getAvailable());
     lineOfCreditD.setCosts(lineOfCredit.getCosts());
     lineOfCreditD.setAmount(lineOfCredit.getAmount());
     lineOfCreditD.setClosingDate(lineOfCredit.getClosingDate());
     lineOfCreditD.setPaymentDueDate(lineOfCredit.getPaymentDueDate());
     lineOfCreditD.setCustomerId(lineOfCredit.getCustomerId());
-    return mapper.toEntity(repository.save(lineOfCreditD));
+    return mapper.toDto(repository.save(lineOfCreditD));
   }
 
   /**
@@ -93,10 +103,10 @@ public class LineOfCreditService implements IService<LineOfCredit, LineOfCredit>
    * @return Retorna el elemento eliminado.
    */
   @Override
-  public LineOfCredit delete(Long id) {
+  public LineOfCredit delete(Long id) throws LineOfCreditNotFoundException {
     LineOfCreditD lineOfCreditD = repository.findByIdOptional(id)
-          .filter(p -> (p.getDeletedAt() == null))
-          .orElseThrow(() -> new NotFoundException());
-    return mapper.toEntity(repository.softDelete(lineOfCreditD));
+          .filter(util::notDelete)
+          .orElseThrow(() -> new LineOfCreditNotFoundException("Line of credit not found."));
+    return mapper.toDto(repository.softDelete(lineOfCreditD));
   }
 }

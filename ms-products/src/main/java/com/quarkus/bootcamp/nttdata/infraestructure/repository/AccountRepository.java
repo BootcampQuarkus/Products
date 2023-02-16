@@ -74,4 +74,9 @@ public class AccountRepository implements IRepository<AccountD> {
     return this.save(accountD);
   }
 
+  public List<AccountD> findByCustomerId(Long id) {
+    return AccountD.find("customerId", id)
+          .list();
+  }
+
 }

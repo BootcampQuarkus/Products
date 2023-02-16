@@ -15,7 +15,7 @@ public class AccountMapper implements IMapper<Account, AccountD> {
    * @throws NullPointerException
    */
   @Override
-  public AccountD toDto(Account account) throws NullPointerException {
+  public AccountD toEntity(Account account) throws NullPointerException {
     AccountD accountD = new AccountD();
     accountD.setCardId(account.getCardId());
     accountD.setAmount(account.getAmount());
@@ -31,7 +31,7 @@ public class AccountMapper implements IMapper<Account, AccountD> {
    * @throws NullPointerException
    */
   @Override
-  public Account toEntity(AccountD accountD) throws NullPointerException {
+  public Account toDto(AccountD accountD) throws NullPointerException {
     Account account = new Account();
     account.setId(accountD.id);
     account.setCardId(accountD.getCardId());

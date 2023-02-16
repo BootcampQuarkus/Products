@@ -17,8 +17,8 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toDtoNull() {
-    LineOfCredit lineOfCredit = null;
-    Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(lineOfCredit));
+    LineOfCreditD lineOfCreditD = null;
+    Assertions.assertThrows(NullPointerException.class, () -> mapper.toDto(lineOfCreditD));
   }
 
   /**
@@ -26,8 +26,8 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toEntityNull() {
-    LineOfCreditD lineOfCreditD = null;
-    Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(lineOfCreditD));
+    LineOfCredit lineOfCredit = null;
+    Assertions.assertThrows(NullPointerException.class, () -> mapper.toEntity(lineOfCredit));
   }
 
   /**
@@ -35,9 +35,8 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toDtoReturnDto() {
-    LineOfCredit lineOfCredit = new LineOfCredit();
-    LineOfCreditD actual = mapper.toDto(lineOfCredit);
-    Assertions.assertInstanceOf(LineOfCreditD.class, actual);
+    LineOfCreditD lineOfCreditD = new LineOfCreditD();
+    Assertions.assertInstanceOf(LineOfCredit.class, mapper.toDto(lineOfCreditD));
   }
 
   /**
@@ -45,9 +44,8 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toEntityReturnEntity() {
-    LineOfCreditD lineOfCreditD = new LineOfCreditD();
-    LineOfCredit actual = mapper.toEntity(lineOfCreditD);
-    Assertions.assertInstanceOf(LineOfCredit.class, actual);
+    LineOfCredit lineOfCredit = new LineOfCredit();
+    Assertions.assertInstanceOf(LineOfCreditD.class, mapper.toEntity(lineOfCredit));
   }
 
   /**
@@ -55,9 +53,9 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toDtoVoid() {
-    LineOfCredit lineOfCredit = new LineOfCredit();
-    LineOfCreditD expected = new LineOfCreditD();
-    LineOfCreditD actual = mapper.toDto(lineOfCredit);
+    LineOfCreditD lineOfCreditD = new LineOfCreditD();
+    LineOfCredit expected = new LineOfCredit();
+    LineOfCredit actual = mapper.toDto(lineOfCreditD);
     Assertions.assertEquals(expected, actual);
   }
 
@@ -66,9 +64,9 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toEntityVoid() {
-    LineOfCreditD lineOfCreditD = new LineOfCreditD();
-    LineOfCredit expected = new LineOfCredit();
-    LineOfCredit actual = mapper.toEntity(lineOfCreditD);
+    LineOfCredit lineOfCredit = new LineOfCredit();
+    LineOfCreditD expected = new LineOfCreditD();
+    LineOfCreditD actual = mapper.toEntity(lineOfCredit);
     Assertions.assertEquals(expected, actual);
   }
 
@@ -78,44 +76,6 @@ class LineOfCreditMapperTest {
    */
   @Test
   public void toDtoValid() {
-    // Variables
-    Double amount = 500.00;
-    Long customerId = 101L;
-    Double available = 300.00;
-    Double cost = 200.00;
-    String closingDate = "10";
-    String paymentDueDate = "10";
-
-    // Input
-    LineOfCredit lineOfCredit = new LineOfCredit();
-    lineOfCredit.setAmount(amount);
-    lineOfCredit.setCustomerId(customerId);
-    lineOfCredit.setAvailable(available);
-    lineOfCredit.setCosts(cost);
-    lineOfCredit.setClosingDate(closingDate);
-    lineOfCredit.setPaymentDueDate(paymentDueDate);
-
-    // Resultado esperado
-    LineOfCreditD expected = new LineOfCreditD();
-    expected.setAmount(amount);
-    expected.setCustomerId(customerId);
-    expected.setAvailable(available);
-    expected.setCosts(cost);
-    expected.setClosingDate(closingDate);
-    expected.setPaymentDueDate(paymentDueDate);
-
-    // Ejecución
-    LineOfCreditD actual = mapper.toDto(lineOfCredit);
-
-    Assertions.assertEquals(expected, actual);
-  }
-
-  /**
-   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
-   * amount, customerId, available, cost, closingDate y paymentDueDate.
-   */
-  @Test
-  public void toEntityValid() {
     // Variables
     Double amount = 500.00;
     Long customerId = 101L;
@@ -143,7 +103,45 @@ class LineOfCreditMapperTest {
     expected.setPaymentDueDate(paymentDueDate);
 
     // Ejecución
-    LineOfCredit actual = mapper.toEntity(lineOfCreditD);
+    LineOfCredit actual = mapper.toDto(lineOfCreditD);
+
+    Assertions.assertEquals(expected, actual);
+  }
+
+  /**
+   * Cuando se envia un elemento valido al metodo toEntity debe retornar un Entity con los mismos datos en los campos
+   * amount, customerId, available, cost, closingDate y paymentDueDate.
+   */
+  @Test
+  public void toEntityValid() {
+    // Variables
+    Double amount = 500.00;
+    Long customerId = 101L;
+    Double available = 300.00;
+    Double cost = 200.00;
+    String closingDate = "10";
+    String paymentDueDate = "10";
+
+    // Input
+    LineOfCredit lineOfCredit = new LineOfCredit();
+    lineOfCredit.setAmount(amount);
+    lineOfCredit.setCustomerId(customerId);
+    lineOfCredit.setAvailable(available);
+    lineOfCredit.setCosts(cost);
+    lineOfCredit.setClosingDate(closingDate);
+    lineOfCredit.setPaymentDueDate(paymentDueDate);
+
+    // Resultado esperado
+    LineOfCreditD expected = new LineOfCreditD();
+    expected.setAmount(amount);
+    expected.setCustomerId(customerId);
+    expected.setAvailable(available);
+    expected.setCosts(cost);
+    expected.setClosingDate(closingDate);
+    expected.setPaymentDueDate(paymentDueDate);
+
+    // Ejecución
+    LineOfCreditD actual = mapper.toEntity(lineOfCredit);
 
     Assertions.assertEquals(expected, actual);
   }

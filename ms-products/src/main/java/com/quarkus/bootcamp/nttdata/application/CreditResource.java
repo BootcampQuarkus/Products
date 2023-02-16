@@ -1,5 +1,7 @@
 package com.quarkus.bootcamp.nttdata.application;
 
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.CreditNotFoundException;
+import com.quarkus.bootcamp.nttdata.domain.Exceptions.CustomerNotFoundException;
 import com.quarkus.bootcamp.nttdata.domain.entity.Credit;
 import com.quarkus.bootcamp.nttdata.domain.services.CreditService;
 import jakarta.inject.Inject;
@@ -17,33 +19,51 @@ public class CreditResource {
   CreditService service;
 
   @GET
-  public Response getAll() {
-    return Response.ok(service.getAll()).build();
+  public Response getAll(@QueryParam("customerId") Long customerId) {
+    return ( customerId != null )?
+          Response.ok(service.getAll(customerId)).build():
+          Response.ok(service.getAll()).build();
   }
 
   @GET
   @Path("/{id}")
   public Response getById(@PathParam("id") Long id) {
-    return Response.ok(service.getById(id)).build();
+    try {
+      return Response.ok(service.getById(id)).build();
+    } catch (CreditNotFoundException e) {
+      return Response.ok(e.getMessage()).status(404).build();
+    }
   }
 
   @POST
   @Transactional
   public Response create(Credit credit) {
-    return Response.ok(service.create(credit)).status(201).build();
+    try {
+      return Response.ok(service.create(credit)).status(201).build();
+    } catch (CustomerNotFoundException e) {
+      return Response.ok(e.getMessage()).status(404).build();
+    }
   }
 
   @PUT
   @Path("{id}")
   @Transactional
   public Response update(@PathParam("id") Long id, Credit credit) {
-    return Response.ok(service.update(id, credit)).status(201).build();
+    try {
+      return Response.ok(service.update(id, credit)).status(201).build();
+    } catch (CustomerNotFoundException | CreditNotFoundException e) {
+      return Response.ok(e.getMessage()).status(404).build();
+    }
   }
 
   @DELETE
   @Path("{id}")
   @Transactional
   public Response delete(@PathParam("id") Long id) {
-    return Response.ok(service.delete(id)).build();
+    try {
+      return Response.ok(service.delete(id)).build();
+    } catch (CreditNotFoundException e) {
+      return Response.ok(e.getMessage()).status(404).build();
+    }
   }
 }
